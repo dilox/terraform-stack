@@ -1,3 +1,12 @@
+terraform {
+  backend "s3" {
+    bucket  = "stack-tfstate"
+    key     = "stack/dev/terraform.tfstate"
+    region  = "us-east-1"
+    profile = "sciabarra"
+  }
+}
+
 variable "region" {
   default = "us-east-1"
 }
