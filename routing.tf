@@ -5,7 +5,7 @@ data "aws_availability_zones" "available" {}
 resource "aws_internet_gateway" "gw" {
    vpc_id = "${aws_vpc.terraformmain.id}"
     tags {
-        #Name = "internet gw terraform generated"
+        Name = "stack gw"
         Application = "AWS::StackId"
     }
 }
@@ -34,7 +34,7 @@ resource "aws_network_acl" "all" {
 resource "aws_route_table" "public" {
   vpc_id = "${aws_vpc.terraformmain.id}"
   tags {
-      Name = "Public"
+      Name = "stack route table"
       Application = "AWS::StackId"
   }
   route {
@@ -42,16 +42,7 @@ resource "aws_route_table" "public" {
         gateway_id = "${aws_internet_gateway.gw.id}"
     }
 }
-resource "aws_route_table" "private" {
-  vpc_id = "${aws_vpc.terraformmain.id}"
-  tags {
-      Name = "Private"
-  }
-  route {
-        cidr_block = "0.0.0.0/0"
-        nat_gateway_id = "${aws_nat_gateway.PublicAZA.id}"
-  }
-}
+
 resource "aws_eip" "forNat" {
     vpc      = true
 }

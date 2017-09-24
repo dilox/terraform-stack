@@ -2,7 +2,7 @@ resource "aws_subnet" "PublicAZA" {
   vpc_id = "${aws_vpc.terraformmain.id}"
   cidr_block = "${var.Subnet-Public-AzA-CIDR}"
   tags {
-        Name = "PublicAZA"
+        Name = "stack subnet"
         Application = "AWS::StackId"
   }
  availability_zone = "${data.aws_availability_zones.available.names[0]}"
